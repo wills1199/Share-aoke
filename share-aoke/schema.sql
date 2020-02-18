@@ -8,25 +8,25 @@ CREATE DATABASE shareaoke;
 
 USE shareaoke;
 
-CREATE TABLE `users` (
+CREATE TABLE `user` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `username` varchar(30)
 );
 
-CREATE TABLE `friends` (
+CREATE TABLE `friend` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `id_users` int,
-  `id_friends` int
+  `id_user` int,
+  `id_friend` int
 );
 
-CREATE TABLE `playlists` (
+CREATE TABLE `playlist` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `id_users` int,
+  `id_user` int,
   `name` varchar(250),
   `decription` varchar(250)
 );
 
-CREATE TABLE `songs` (
+CREATE TABLE `song` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `title` varchar(50),
   `album` varchar(50),
@@ -34,18 +34,18 @@ CREATE TABLE `songs` (
   `genre` varchar(50)
 );
 
-CREATE TABLE `party` (
+CREATE TABLE `playlist_song` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `id_playlist` int,
-  `id_songs` int
+  `id_song` int
 );
 
-ALTER TABLE `friends` ADD FOREIGN KEY (`id_users`) REFERENCES `users` (`id`);
+ALTER TABLE `friend` ADD FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
-ALTER TABLE `friends` ADD FOREIGN KEY (`id_friends`) REFERENCES `users` (`id`);
+ALTER TABLE `friend` ADD FOREIGN KEY (`id_friend`) REFERENCES `user` (`id`);
 
-ALTER TABLE `playlists` ADD FOREIGN KEY (`id_users`) REFERENCES `users` (`id`);
+ALTER TABLE `playlist` ADD FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
-ALTER TABLE `playlists_songs` ADD FOREIGN KEY (`id_playlist`) REFERENCES `playlists` (`id`);
+ALTER TABLE `party` ADD FOREIGN KEY (`id_playlist`) REFERENCES `playlist` (`id`);
 
-ALTER TABLE `playlists_songs` ADD FOREIGN KEY (`id_songs`) REFERENCES `songs` (`id`);
+ALTER TABLE `party` ADD FOREIGN KEY (`id_song`) REFERENCES `song` (`id`);
